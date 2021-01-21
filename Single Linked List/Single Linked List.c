@@ -122,8 +122,9 @@ void _erase(const int index)	// index가 0(head)인 경우 고려!!!
 		for (Node* pNode = list->head; ; pNode = pNode->next) {	// 리스트 순환
 			int i = 0;
 			if (i++ + 1 == index) {	// 다음 노드(pNode->next)가 해당 index의 노드인 경우
+				Node* temp = pNode->next->next;
 				free(pNode->next);
-				pNode->next = NULL;	// free()를 사용했으므로 NULL 대입
+				pNode->next = temp;
 				break;
 			}
 		}
