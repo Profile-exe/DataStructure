@@ -82,6 +82,11 @@ void _insert(const int index, const int data)
 	default:	// 요소가 2개 이상인 경우
 		if (!index) {			// index == 0(head)인 경우
 			Node* newNode = calloc(1, sizeof(Node));
+			Node* lastNode = list->head;	// 마지막 노드가 새로운 head를 가리키게 해야함
+			// 마지막 node 구하기
+			for (lastNode; lastNode->next != list->head; lastNode = lastNode->next);
+			lastNode->next = newNode;	// head가 될 newNode를 가리킨다.
+			
 			newNode->next = list->head;
 			newNode->data = data;
 			list->head = newNode;
@@ -150,26 +155,26 @@ List* initialize() {	// 동적 할당으로 초기화 후 값 복사로 반환
 int main(void)
 {
 	list = initialize();	// 함수 호출은 전역에서 불가능 하므로 main에서 수행
-	
+
 	printf("%d\n", list->size());
 	printf("%d\n", list->empty());
-	
+
 	list->push_back(3);
 	list->push_back(6);
 	list->push_back(4);
-	
+
 	printf("%d\n", list->size());
 	printf("%d\n", list->empty());
-	
+
 	list->pop_back();
 	list->pop_back();
 
 	printf("%d\n", list->size());
-	
+
 	list->insert(0, 2);
 	list->erase(0);
 	list->erase(0);
-	
+
 	printf("%d\n", list->size());
 	free(list);
 	return 0;

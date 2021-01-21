@@ -71,8 +71,12 @@ public:
 			head->next = head;
 			break;
 		default:
-			if (!index) {	// head에 insert 하는 경우 newNode 생성 후  head로 변경
+			if (!index) {	// 원형 연결리스트는 마지막 노드가 head를 가리키므로 newNode를 가리키게 설정
 				auto* newNode = new Node(data);
+				auto* lastNode = head;	// 마지막 노드를 구하여 새로운 head를 가리키게 해야함
+				for (lastNode; lastNode->next != head; lastNode = lastNode->next);
+				lastNode->next = newNode; // head가 될 newNode를 가리킨다.
+
 				newNode->next = head;
 				head = newNode;
 				break;
