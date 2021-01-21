@@ -82,11 +82,12 @@ void _insert(const int index, const int data)
 	default:	// 요소가 2개 이상인 경우
 		if (!index) {			// index == 0(head)인 경우
 			Node* newNode = calloc(1, sizeof(Node));
+			
 			Node* lastNode = list->head;	// 마지막 노드가 새로운 head를 가리키게 해야함
 			// 마지막 node 구하기
 			for (lastNode; lastNode->next != list->head; lastNode = lastNode->next);
 			lastNode->next = newNode;	// head가 될 newNode를 가리킨다.
-			
+
 			newNode->next = list->head;
 			newNode->data = data;
 			list->head = newNode;
@@ -123,6 +124,12 @@ void _erase(const int index)	// index가 0(head)인 경우 고려!!!
 	default:	// 요소가 2개 이상인 경우
 		if (!index) {			// index == 0(head)인 경우
 			Node* temp = list->head->next;
+
+			Node* lastNode = list->head;	// 마지막 노드가 새로운 head를 가리키게 해야함
+			// 마지막 node 구하기
+			for (lastNode; lastNode->next != list->head; lastNode = lastNode->next);
+			lastNode->next = temp;	// head가 될 temp를 가리킨다.
+			
 			free(list->head);
 			list->head = temp;	// head->next를 head로 변경
 			break;

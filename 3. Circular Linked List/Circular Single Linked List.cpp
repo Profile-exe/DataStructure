@@ -111,6 +111,11 @@ public:
 		default:
 			if (!index) {	// head를 지우는 경우 head->next를 head로 설정
 				auto* temp = head->next;
+				
+				auto* lastNode = head;	// 마지막 노드를 구하여 새로운 head를 가리키게 해야함
+				for (lastNode; lastNode->next != head; lastNode = lastNode->next);
+				lastNode->next = temp; // head가 될 temp를 가리킨다.
+				
 				delete head;
 				head = temp;
 				break;
