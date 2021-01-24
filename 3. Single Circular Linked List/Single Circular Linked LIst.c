@@ -16,6 +16,7 @@ typedef struct _List {	// List 구조
 	void (*pop_back)();
 	void (*insert)(int, int);
 	void (*erase)(int);
+	void (*reverse)();
 } List;
 
 List* list = NULL;	// 전역 변수 선언
@@ -82,7 +83,7 @@ void _insert(const int index, const int data)
 	default:	// 요소가 2개 이상인 경우
 		if (!index) {			// index == 0(head)인 경우
 			Node* newNode = calloc(1, sizeof(Node));
-			
+
 			Node* lastNode = list->head;	// 마지막 노드가 새로운 head를 가리키게 해야함
 			// 마지막 node 구하기
 			for (lastNode; lastNode->next != list->head; lastNode = lastNode->next);
@@ -129,7 +130,7 @@ void _erase(const int index)	// index가 0(head)인 경우 고려!!!
 			// 마지막 node 구하기
 			for (lastNode; lastNode->next != list->head; lastNode = lastNode->next);
 			lastNode->next = temp;	// head가 될 temp를 가리킨다.
-			
+
 			free(list->head);
 			list->head = temp;	// head->next를 head로 변경
 			break;
@@ -147,6 +148,35 @@ void _erase(const int index)	// index가 0(head)인 경우 고려!!!
 	list->length--;
 }
 
+void _reverse()
+{
+	switch(list->size()) {
+	case 0:
+	case 1:
+		break;
+	case 2:
+		list->head = list->head->next;
+		break;
+	default: {	// C언어에서 변수 선언이 레이블에 적용되지 않는 문제를 해결하기 위해 블럭'{}'을 추가함
+		Node* front_lastNode = list->head; for (; front_lastNode->next->next != list->head; front_lastNode = front_lastNode->next);
+		front_lastNode->next->next = front_lastNode;	// 마지막노드는 바로 전 노드를 가리키게한다.
+
+		Node* tempLast = front_lastNode->next;			// head가 마지막 노드가 되어야하므로 마지막 노드를 tempLast에 저장하고 가리키게함
+
+		while (list->head->next->next != list->head) {
+			for (Node* pNode = list->head; ; pNode = pNode->next) {
+				if (pNode->next == pNode->next->next->next) {
+					pNode->next->next = pNode;
+					break;
+				}
+			}
+		}
+		list->head->next = tempLast;	// head가 마지막 노드가 되어 head가 될 tempLast를 가리키게 한다.
+		list->head = tempLast;
+	}
+	}
+}
+
 List* initialize() {	// 동적 할당으로 초기화 후 값 복사로 반환
 	List* temp = calloc(1, sizeof(List));
 	temp->length = 0;
@@ -156,6 +186,7 @@ List* initialize() {	// 동적 할당으로 초기화 후 값 복사로 반환
 	temp->pop_back = _pop_back;
 	temp->insert = _insert;
 	temp->erase = _erase;
+	temp->reverse = _reverse;
 	return temp;
 }
 
@@ -169,6 +200,11 @@ int main(void)
 	list->push_back(3);
 	list->push_back(6);
 	list->push_back(4);
+	list->push_back(9);
+
+	// list : 3 -> 6 -> 4 -> 9 -> 3 -> 6 -> ...
+	list->reverse();
+	// list : 9 -> 4 -> 6 -> 3 -> 9 -> 4 -> ...	
 
 	printf("%d\n", list->size());
 	printf("%d\n", list->empty());

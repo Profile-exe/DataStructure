@@ -18,6 +18,7 @@ class List:
 	def push_back(self, data):
 		if self.empty():  # 리스트가 빈 경우 head 노드 할당
 			self.head = Node(data)
+			self.head.next = self.head  # 원형 연결리스트 이므로 head.next는 head
 			self.length += 1
 			return
 		node = self.head
@@ -114,6 +115,32 @@ class List:
 						break
 		self.length -= 1
 
+	def reverse(self):
+		size = self.size()
+		if size == 0 or size == 1:
+			return
+		elif size == 2:
+			self.head = self.head.next
+			return
+		else:
+			front_lastNode = self.head
+			while True:     # 마지막 노드의 바로 앞 노드를 구하는 루프
+				if front_lastNode.next.next is self.head:
+					break
+				front_lastNode = front_lastNode.next
+			front_lastNode.next.next = front_lastNode   # 마지막 노드는 바로 전 노드를 가리키게 한다.
+			tempLast = front_lastNode.next              # head가 마지막 노드가 되므로 마지막 노드를 tempLast에 저장했다가 가리킴
+
+			while self.head.next.next is not self.head:
+				node = self.head
+				while True:
+					if node.next is node.next.next.next:    # node->next에서 무한루프가 생성되면(반대로 가리키고 있으면)
+						node.next.next = node               # node까지 반대로 가리키게 해준다.
+						break
+					node = node.next
+			self.head.next = tempLast
+			self.head = tempLast
+
 
 if __name__ == '__main__':
 	_list = List()
@@ -124,6 +151,11 @@ if __name__ == '__main__':
 	_list.push_back(3)
 	_list.push_back(4)
 	_list.push_back(6)
+	_list.push_back(9)
+
+	# list : 3 -> 4 -> 6 -> 9 -> 3 -> 4 -> ...
+	_list.reverse()
+	# list : 9 -> 6 -> 4 -> 3 -> 9 -> 6 -> ...
 
 	_list.erase(1)
 
