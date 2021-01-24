@@ -81,8 +81,8 @@ public:
 				head = newNode;
 				break;
 			}
+			auto i = 0;
 			for (auto* pNode = head; ; pNode = pNode->next) {
-				auto i = 0;
 				if (i++ + 1 == index) {	// pNode->next가 해당 인덱스 노드인 경우
 					auto* newNode = new Node(data);
 					newNode->next = pNode->next;
@@ -120,8 +120,8 @@ public:
 				head = temp;
 				break;
 			}
+			auto i = 0;
 			for (auto* pNode = head; ; pNode = pNode->next) {
-				auto i = 0;
 				if (i++ + 1 == index) {
 					auto* temp = pNode->next->next;
 					delete pNode->next;

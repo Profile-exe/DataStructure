@@ -94,8 +94,8 @@ void _insert(const int index, const int data)
 			list->head = newNode;
 			break;
 		}
+		int i = 0;
 		for (Node* pNode = list->head; ; pNode = pNode->next) {	// 리스트 순환
-			int i = 0;
 			if (i++ + 1 == index) {	// 다음 노드(pNode->next)가 해당 index의 노드인 경우
 				Node* newNode = calloc(1, sizeof(Node));
 				newNode->next = pNode->next;
@@ -135,8 +135,8 @@ void _erase(const int index)	// index가 0(head)인 경우 고려!!!
 			list->head = temp;	// head->next를 head로 변경
 			break;
 		}
+		int i = 0;
 		for (Node* pNode = list->head; ; pNode = pNode->next) {	// 리스트 순환
-			int i = 0;
 			if (i++ + 1 == index) {	// 다음 노드(pNode->next)가 해당 index의 노드인 경우
 				Node* temp = pNode->next->next;
 				free(pNode->next);
