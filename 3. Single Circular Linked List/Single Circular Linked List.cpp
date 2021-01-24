@@ -46,6 +46,7 @@ public:
 		case 1:	// head만 있는 경우
 			delete head;
 			head = nullptr;
+			length--;
 			break;
 		default:
 			for (auto* pNode = head; ; pNode = pNode->next) {
