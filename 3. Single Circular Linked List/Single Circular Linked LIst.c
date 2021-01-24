@@ -55,7 +55,6 @@ void _pop_back()
 	case 1:		// head만 존재할 경우
 		free(list->head);
 		list->head = NULL;	// free()를 사용했으므로 NULL 대입
-		list->length--;
 		break;
 	default:	// 요소가 2개 이상인 경우
 		for (Node* pNode = list->head; ; pNode = pNode->next) {	// 리스트 순환
