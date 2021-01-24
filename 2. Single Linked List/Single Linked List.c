@@ -22,7 +22,7 @@ List* list = NULL;	// 전역 변수 선언
 
 int _size() { return list->length; }
 
-bool _empty() {	return (list->head == NULL) ? true : false; }
+bool _empty() { return (list->head == NULL) ? true : false; }
 
 void _push_back(const int data)
 {
@@ -45,7 +45,7 @@ void _push_back(const int data)
 
 void _pop_back()
 {
-	switch(list->size()) {
+	switch (list->size()) {
 	case 0:		// 빈 리스트인 경우
 		printf("빈 리스트 입니다.");
 		return;
@@ -56,7 +56,7 @@ void _pop_back()
 	default:	// 요소가 2개 이상인 경우
 		for (Node* pNode = list->head; ; pNode = pNode->next) {	// 리스트 순환
 			if (pNode->next->next == NULL) {	// pNode->next가 마지막 노드인 경우
-				free(pNode->next);				
+				free(pNode->next);
 				pNode->next = NULL;	// free()를 사용했으므로 NULL 대입
 				break;
 			}
@@ -136,7 +136,7 @@ List* initialize() {	// 동적 할당으로 초기화 후 값 복사로 반환
 	List* temp = calloc(1, sizeof(List));
 	temp->length = 0;
 	temp->size = _size;
-	temp->empty= _empty;
+	temp->empty = _empty;
 	temp->push_back = _push_back;
 	temp->pop_back = _pop_back;
 	temp->insert = _insert;
@@ -149,17 +149,23 @@ int main(void)
 	list = initialize();	// 함수 호출은 전역에서 불가능 하므로 main에서 수행
 	printf("%d\n", list->size());
 	printf("%d\n", list->empty());
+	
 	list->push_back(3);
 	list->push_back(6);
 	list->push_back(4);
+	
 	printf("%d\n", list->size());
 	printf("%d\n", list->empty());
+	
 	list->pop_back();
 	list->pop_back();
+	
 	printf("%d\n", list->size());
+	
 	list->insert(0, 2);
 	list->erase(0);
 	list->erase(0);
+	
 	printf("%d\n", list->size());
 	free(list);
 	return 0;
