@@ -1,27 +1,30 @@
 #include <iostream>
 #include <climits>
 
+template <typename T>
 class Stack
 {
 private:
-	int top;
-	int array[20];
+	int _top;
+	T arr[30];
 public:
-	Stack() : top(-1) { }
+	Stack() : _top(-1) { std::fill_n(arr, sizeof(arr) / sizeof(T), 0); }
 
-	bool empty() const { return top == -1 ? true : false; }
+	bool empty() const { return _top == -1; }
 
-	void push(const int data) { array[++top] = data; }
+	void push(const T data) { arr[++_top] = data; }
 
-	int pop() { if (empty()) std::cout << "비어있습니다." << '\n'; return empty() ? INT_MIN : array[top--]; }
+	T top() const { return empty() ? 0 : arr[_top]; }
+
+	T pop() { if (empty()) std::cout << "비어있습니다." << '\n'; return empty() ? INT_MIN : arr[_top--]; }
 };
 
-int main(void)
+int main()
 {
-	Stack stack;
-	
+	Stack<int> stack;
+
 	stack.pop();
-	
+
 	std::cout << stack.empty() << '\n';
 
 	stack.push(1);
@@ -29,12 +32,12 @@ int main(void)
 	stack.push(3);
 	stack.push(4);
 	stack.push(5);
-	
+
 	std::cout << stack.empty() << '\n';
 
 	std::cout << stack.pop() << '\n';
 	std::cout << stack.pop() << '\n';
 	std::cout << stack.pop() << '\n';
-	
+
 	return 0;
 }
