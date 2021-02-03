@@ -31,8 +31,8 @@ public:
 		for (auto i = head + 1; i < tail; i++) {    // 삽입 정렬 - 소수끼리, 합성수끼리 정렬
 			for (auto j = i + 1; j <= tail; j++) {
 				switch(is_compos(arr[i]) + is_compos(arr[j])) {
-				case 0: if (arr[i] > arr[j]) swap(arr[i], arr[j]); break;    // 합성수끼리 정렬
-				case 2: if (arr[i] > arr[j]) swap(arr[i], arr[j]); break;    // 소수끼리 정렬
+				case 0: if (arr[i] > arr[j]) swap(arr[i], arr[j]); break;    // 소수끼리 정렬
+				case 2: if (arr[i] > arr[j]) swap(arr[i], arr[j]); break;    // 합성수끼리 정렬
 				}
 			}
 		}
