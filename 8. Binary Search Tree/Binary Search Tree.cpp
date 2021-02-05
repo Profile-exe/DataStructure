@@ -58,13 +58,17 @@ public:
             return;
         }
 
+        // cout << pNode->value << ' ';     // preorder traversal : 전위 순회
+
         if (pNode->left != nullptr)         // 왼쪽이 있는 경우 들어간다.
             traversal(pNode->left);
 
-        cout << pNode->value << ' ';        // 자기 자신을 출력
+        cout << pNode->value << ' ';        // inorder traversal : 중위 순회
 
         if (pNode->right != nullptr)        // 오른쪽이 있는 경우 들어간다.
             traversal(pNode->right);
+
+        // cout << pNode->value << ' ';     // postorder traversal : 후위 순회
     }
 };
 
