@@ -66,7 +66,7 @@ public:
         }
     }
 
-    void traversal(Node*& pNode = root) const {    // 8의 배수 우선 순회
+    void traversal(Node*& pNode = root) const {    // add()에 의해 중위 순회(inorder traversal) 시 8의 배수 우선 순회
         if (pNode->isLeaf()) {              // 끝 노드인 경우 출력 후 return
             cout << pNode->value << ' ';
             return;
