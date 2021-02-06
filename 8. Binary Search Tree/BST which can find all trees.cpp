@@ -107,10 +107,10 @@ public:
             divide[_index++].subroot = copy(size, pNode);
             return;
         }
-        // 현재 노드
-        divide[_index++].subroot = copy(size, pNode);
         // 왼쪽 노드
         getTree(size, pNode->left, depth - 1);
+        // 현재 노드
+        divide[_index++].subroot = copy(size, pNode);
         // 오른쪽 노드
         getTree(size, pNode->right, depth - 1);
     }
