@@ -107,6 +107,7 @@ public:
             divide[_index++].subroot = copy(size, pNode);
             return;
         }
+        // 중위 순회(inorder traversal) 방식으로 크기순(오름차순) 입력
         // 왼쪽 노드
         getTree(size, pNode->left, depth - 1);
         // 현재 노드
