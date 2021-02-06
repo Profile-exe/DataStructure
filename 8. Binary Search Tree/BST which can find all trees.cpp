@@ -24,7 +24,7 @@ public:
     BST* divide;     // 모든 크기의 노드를 담는 포인터배열
     Node* subroot;   // divide에 담은 것들을 실행시켜주기 위해 (root가 static멤버라서 traversal에 subroot넣고 실행)
 
-    BST() : _size(0), _index(0), divide(nullptr) { }
+    BST() : _size(0), _index(0), divide(nullptr), subroot(nullptr) { }
 
     int getLen() const {    // 쪼갠 노드들을 담을 배열의 길이를 구하는 함수
         auto len = 0;
