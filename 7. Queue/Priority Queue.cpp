@@ -14,7 +14,7 @@ private:
     int front, rear;     // front : 첫번째 요소의 바로 앞 인덱스, rear : 마지막 요소의 인덱스
     T arr[10001];
 public:
-    Queue() : front(-1), rear(-1) { std::fill_n(arr, sizeof(arr) / sizeof(T), 0); }
+    Queue() : front(-1), rear(-1) { std::fill_n(arr, sizeof(arr) / sizeof(arr[0]), 0); }
 
     int size() const { return rear - front; }
 
