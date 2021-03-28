@@ -8,7 +8,7 @@ private:
 	int _top;
 	T arr[30];
 public:
-	Stack() : _top(-1) { std::fill_n(arr, sizeof(arr) / sizeof(T), 0); }
+	Stack() : _top(-1) { std::fill_n(arr, sizeof(arr) / sizeof(arr[0]), 0); }
 
 	bool empty() const { return _top == -1; }
 
@@ -16,7 +16,7 @@ public:
 
 	T top() const { return empty() ? 0 : arr[_top]; }
 
-	T pop() { if (empty()) std::cout << "����ֽ��ϴ�." << '\n'; return empty() ? INT_MIN : arr[_top--]; }
+	T pop() { if (empty()) std::cout << "ºñ¾îÀÖ½À´Ï´Ù." << '\n'; return empty() ? INT_MIN : arr[_top--]; }
 };
 
 int main()
